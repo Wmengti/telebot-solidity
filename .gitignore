@@ -6,6 +6,10 @@ coverage
 coverage.json
 typechain
 typechain-types
+.vscode
+artifacts
+build
+deployments
 
 # Hardhat files
 cache
