@@ -31,5 +31,10 @@ hh deploy --network polygonMumbai
     "format:check": "prettier --check .",
     "format:fix": "prettier --write ."  
 ```
+when git commit sumbitting, the husy will auto format.
 
 ## audit analysis
+**slither**
+```
+"slither": "slither . --filter-paths 'node_modules/'"
+```

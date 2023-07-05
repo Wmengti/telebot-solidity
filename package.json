@@ -13,7 +13,8 @@
     "lint:contracts": "solhint 'contracts/*.sol'",
     "lint:contracts:fix": "solhint 'contracts/**/*.sol' --fix",
     "format:check": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "slither": "slither . --filter-paths 'node_modules/'"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.6.1",

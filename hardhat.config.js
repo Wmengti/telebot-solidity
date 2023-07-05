@@ -26,22 +26,10 @@ module.exports = {
         version: "0.8.18",
         settings: SOLC_SETTINGS,
       },
-      {
-        version: "0.8.6",
-        settings: SOLC_SETTINGS,
-      },
-      {
-        version: "0.7.0",
-        settings: SOLC_SETTINGS,
-      },
-      {
-        version: "0.6.6",
-        settings: SOLC_SETTINGS,
-      },
-      {
-        version: "0.4.24",
-        settings: SOLC_SETTINGS,
-      },
+      // {
+      //   version: "0.8.6",
+      //   settings: SOLC_SETTINGS,
+      // },
     ],
   },
   networks: {
@@ -88,7 +76,7 @@ module.exports = {
     sources: "./contracts",
     tests: "./test",
     cache: "./build/cache",
-    artifacts: "./build/artifacts",
+    artifacts: "./artifacts",
   },
   mocha: {
     timeout: 200000, // 200 seconds max for running tests

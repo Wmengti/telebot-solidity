@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity ^0.8.18;
 
 import {ERC1155URIStorage} from "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol";
 import {ERC1155} from "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+
+import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
 
-contract ContractNFT1155 is ERC1155, ERC1155URIStorage, AccessControl {
+contract ContractNFT1155 is ERC1155, ERC1155URIStorage, ReentrancyGuard {
   using Strings for uint256;
 
   uint256 private _tokenIdCounter = 1;
@@ -24,7 +25,7 @@ contract ContractNFT1155 is ERC1155, ERC1155URIStorage, AccessControl {
     symbol = _symbol;
   }
 
-  function mintPair(address _employer, address _employee, string memory contractName) external {
+  function mintPair(address _employer, address _employee, string memory contractName) external nonReentrant {
     if (address(0) == _employer || address(0) == _employee) revert IsZeroAddress();
 
     _mint(_employer, _tokenIdCounter, 1, "");
@@ -96,7 +97,7 @@ contract ContractNFT1155 is ERC1155, ERC1155URIStorage, AccessControl {
     return super.uri(tokenId);
   }
 
-  function supportsInterface(bytes4 interfaceId) public view override(ERC1155, AccessControl) returns (bool) {
+  function supportsInterface(bytes4 interfaceId) public view override(ERC1155) returns (bool) {
     return super.supportsInterface(interfaceId);
   }
 }
