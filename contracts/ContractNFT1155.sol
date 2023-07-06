@@ -26,7 +26,7 @@ contract ContractNFT1155 is ERC1155, ERC1155URIStorage, ReentrancyGuard {
   }
 
   function mintPair(address _employer, address _employee, string memory contractName) external nonReentrant {
-    if (address(0) == _employer || address(0) == _employee) revert IsZeroAddress();
+    if (address(0) == _employer || address(0) == _employee || _employer != _employee) revert IsZeroAddress();
 
     _mint(_employer, _tokenIdCounter, 1, "");
     _mint(_employee, _tokenIdCounter, 1, "");
