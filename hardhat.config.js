@@ -5,6 +5,7 @@ require("hardhat-contract-sizer");
 require("@openzeppelin/hardhat-upgrades");
 require("hardhat-gas-reporter");
 require("hardhat-deploy");
+require("hardhat-dependency-compiler");
 
 // Enable gas reporting (optional)
 const REPORT_GAS = process.env.REPORT_GAS?.toLowerCase() === "true" ? true : false;
@@ -26,18 +27,30 @@ module.exports = {
         version: "0.8.18",
         settings: SOLC_SETTINGS,
       },
-      // {
-      //   version: "0.8.6",
-      //   settings: SOLC_SETTINGS,
-      // },
+      {
+        version: "0.8.7",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.8.0",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.5.7",
+        settings: SOLC_SETTINGS,
+      },
+
+      {
+        version: "0.7.6",
+        settings: SOLC_SETTINGS,
+      },
     ],
   },
   networks: {
     hardhat: {
-      chainId: 31337,
-    },
-    localhost: {
-      chainId: 31337,
+      forking: {
+        url: "https://eth-mainnet.g.alchemy.com/v2/" + process.env.ALCHEMY_KEY,
+      },
     },
     goerli: {
       chainId: 5,
@@ -52,6 +65,13 @@ module.exports = {
       chainId: 80001,
       confirmations: 6,
       nativeCurrencySymbol: "MATIC",
+    },
+    neoevm: {
+      url: process.env.NEOEVM_RPC_URL || "UNSET",
+      accounts: [process.env.PRIVATE_KEY],
+      chainId: 2970385,
+      confirmations: 6,
+      nativeCurrencySymbol: "GAS",
     },
   },
   etherscan: {
@@ -86,5 +106,8 @@ module.exports = {
       default: 0,
       1: 0,
     },
+  },
+  dependencyCompiler: {
+    paths: ["solmate/src/tokens/WETH.sol"],
   },
 };
